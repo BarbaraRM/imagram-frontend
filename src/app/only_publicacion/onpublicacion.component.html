@@ -1,0 +1,17 @@
+<div class="row mt-5 justify-content-center">
+
+    <div class="col-12 col-sm-12 col-md-12 col-lg-7 col-xl-7 text-center">
+        <div *ngFor=" let publicacion of publicaciones">
+            <app-publicacion [id_publicacion]="publicacion.id_publicacion" [id_user]="publicacion.id_user"
+                [usuario]="publicacion.publicada_por" [imagen]="publicacion.url_pub_fv"
+                [descripcion]="publicacion.descripcion" [fecha]="publicacion.fecha_pub"
+                [img_perfil]="publicacion.url_foto_perfil" [cant_megusta]="publicacion.cant_megusta"
+                [cant_meencanta]="publicacion.cant_meencanta" [cant_meentristece]="publicacion.cant_meentristece"
+                [cant_meenfada]="publicacion.cant_meenfada" [cant_medivierte]="publicacion.cant_medivierte"
+                [cant_mesorprende]="publicacion.cant_mesorprende" [cant_comentarios]="publicacion.cant_comentarios"
+                [reaccion_usada]="publicacion.reaccion_usada" [comentarios]="publicacion.comentarios"
+                [guardada]="publicacion.guardada">
+            </app-publicacion>
+        </div>
+    </div>
+</div>

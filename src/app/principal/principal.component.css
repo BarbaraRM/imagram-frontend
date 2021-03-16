@@ -1,0 +1,27 @@
+/*HISTORIAS*/
+
+.scrolling-wrapper {
+    overflow-x: auto;
+}
+
+::-webkit-scrollbar {
+    display: none;
+}
+
+.imagram-historias {
+    height: 100px;
+    border-color: rgb(230, 225, 225);
+    border-style: solid;
+    border-width: 1px;
+    background-color: rgb(255, 255, 255);
+    margin-top: 20px;
+    margin-bottom: 20px;
+    margin-left: 0px;
+    margin-right: 0px;
+}
+
+/*SUGERENCIAS*/
+
+.sugerencias {
+    margin-top: 20px;
+}

@@ -1,0 +1,309 @@
+<!--<div class="navbar navbar-expand-lg navbar-light justify-content-center  ">-->
+<div class="row imagram-navbar navbar-expand-lg" style="z-index: 1 !important">
+    <div class="col-md-4 col-lg-4 text-center d-none d-md-block d-lg-block d-xl-block">
+        <h2 class="mt-1 imagran-nombre" [routerLink]="['/home']" style="cursor: pointer;">
+            Imagram2</h2>
+    </div>
+
+    <div class="col-md-4 col-lg-4 ">
+
+        <input class="form-control mt-2 mx-auto d-none d-lg-block d-xl-block " id="textoBuscar2"
+            style="height: 28px; width:300px;" type="search" placeholder="Buscar" aria-label="Search"
+            data-toggle="dropdown" (keyup)="BuscarUsuario()" autocomplete="off">
+
+        <div class="dropdown-menu dropdown-menu-left " style="background-color: white;"
+            aria-labelledby="dropdownMenuLink">
+            <a class="dropdown-item">
+                <div class="mt-2 mb-3">
+                    <h5><strong> Usuarios Buscados </strong></h5>
+                </div>
+                <div class="col-md-12 notificacion">
+
+                    <div *ngFor="let usuario of usuarios" (click)="Abrirperfil(usuario.usuario)">
+                        <div class="row" style="cursor: pointer;">
+                            <div style="height: 20px;" class="col-2 col-sm-2 col-md-2 text-center ">
+
+
+                                <img class="container_ic_notifi" src={{usuario.url_foto_perfil}}
+                                    style="border-radius: 100px;" width="50px" height="50px" alt="">
+
+                            </div>
+
+                            <div class="col-10 col-sm-10 col-md-10" style="left: 25px;">
+                                <div class="">
+                                    <p class="mr-3"><strong>{{usuario.usuario}}</strong><br> {{usuario.nombre_completo}}
+                                    </p>
+
+                                </div>
+                                <div class="text-right" style="margin-top: -20px; height: 20px;">
+                                    <!-- {{notificacion.fecha_not}}-->
+                                </div>
+                            </div>
+                        </div>
+                        <hr>
+                    </div>
+                </div>
+
+            </a>
+        </div>
+
+
+
+    </div>
+
+
+
+
+
+    <div class="col-md-4 col-lg-4">
+        <div class="row justify-content-center">
+            <!-- Buscar -->
+            <a class="navbar-brand d-none d-md-block d-lg-none " style="color: black;"><i class="fas fa-search"></i></a>
+
+
+
+
+            <!-- principal -->
+            <a [routerLink]="['/home']" class="navbar-brand" style="color: black;"><i class="fas fa-home"></i></a>
+            <!-- Mensajes -->
+            <a [routerLink]="['/chat']" class="navbar-brand" style="color: black;"><i
+                    class="fas fa-location-arrow"></i></a>
+            <!-- explorar -->
+            <a [routerLink]="['/explorar']" class="navbar-brand" style="color: black;"><i
+                    class="fas fa-map-marked-alt"></i></a>
+            <!--Notificaciones-->
+            <div class="list-group">
+                <a class="navbar-brand" style="color: black;" href="#" role="button" id="dropdownMenuLink"
+                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <i class="far fa-heart"></i>
+                </a>
+
+
+                <div class="dropdown-menu dropdown-menu-right " style="background-color: white;"
+                    aria-labelledby="dropdownMenuLink">
+                    <a class="dropdown-item">
+                        <div class="mt-2 mb-3">
+                            <h5><strong> Registro de Actividad</strong></h5>
+                        </div>
+                        <div class="col-md-12 notificacion">
+
+                            <div *ngFor="let notificacion of notificaciones">
+                                <div class="row" style="cursor: pointer;">
+                                    <div *ngIf="notificacion.tipo_notificacion ==='COMENTARIO'"
+                                        class="col-2 col-sm-2 col-md-2  text-center " style="height: 20px;">
+                                        <h4 class="align-self-center bg_notif_comment">
+                                            <i class="mt-3 ic_notif fas fa-comment-alt"></i>
+                                        </h4>
+                                    </div>
+
+                                    <!--SOLICITUDES DE SEGUIMIENTO-->
+                                    <div *ngIf="notificacion.tipo_notificacion ==='CONF_SOLICITUD'"
+                                        class="col-2 col-sm-2 col-md-2  text-center " style="height: 20px;">
+                                        <h4 class="align-self-center bg_notif_conf_solic">
+                                            <i class="mt-3 ic_notif fas fa-user-friends "></i>
+                                        </h4>
+                                    </div>
+
+                                    <div *ngIf="notificacion.tipo_notificacion ==='SEGUIR_A'"
+                                        class="col-2 col-sm-2 col-md-2  text-center " style="height: 20px;">
+                                        <h4 class="align-self-center bg_notif_conf_solic">
+                                            <i class="mt-3 ic_notif fas fa-user-friends "></i>
+                                        </h4>
+                                    </div>
+
+                                    <!--REACCIONES EN COMENTARIOS-->
+                                    <div *ngIf="notificacion.tipo_notificacion ==='REACCION_ME_ENFADA' "
+                                        style="height: 20px;" class="col-2 col-sm-2 col-md-2 text-center ">
+                                        <h2 class="bg_notif_comment container_ic_notifi">
+                                            <h4 class="align-self-center">
+                                                <i class="mt-3 fas fa-comment-alt"></i>
+                                                <img class="mt-3 ic_notif_reacciones" src="../../assets/angry.ico"
+                                                    width="25px" height="25px" alt="">
+                                            </h4>
+                                        </h2>
+                                    </div>
+
+                                    <div *ngIf="notificacion.tipo_notificacion ==='REACCION_ME_DIVIERTE' "
+                                        style="height: 20px;" class="col-2 col-sm-2 col-md-2 text-center ">
+                                        <h2 class="bg_notif_comment container_ic_notifi">
+                                            <h4 class="align-self-center">
+                                                <i class="mt-3 fas fa-comment-alt"></i>
+                                                <img class="mt-3 ic_notif_reacciones" src="../../assets/haha.ico"
+                                                    width="25px" height="25px" alt="">
+                                            </h4>
+                                        </h2>
+                                    </div>
+
+                                    <div *ngIf="notificacion.tipo_notificacion ==='REACCION_ME_GUSTA' "
+                                        style="height: 20px;" class="col-2 col-sm-2 col-md-2 text-center ">
+                                        <h2 class="bg_notif_comment container_ic_notifi">
+                                            <h4 class="align-self-center">
+                                                <i class="mt-3 fas fa-comment-alt"></i>
+                                                <img class="mt-3 ic_notif_reacciones" src="../../assets/like.ico"
+                                                    width="25px" height="25px" alt="">
+                                            </h4>
+                                        </h2>
+                                    </div>
+
+                                    <div *ngIf="notificacion.tipo_notificacion ==='REACCION_ME_ENCANTA' "
+                                        style="height: 20px;" class="col-2 col-sm-2 col-md-2 text-center ">
+                                        <h2 class="bg_notif_comment container_ic_notifi">
+                                            <h4 class="align-self-center">
+                                                <i class="mt-3 fas fa-comment-alt"></i>
+                                                <img class="mt-3 ic_notif_reacciones" src="../../assets/love.ico"
+                                                    width="25px" height="25px" alt="">
+                                            </h4>
+                                        </h2>
+                                    </div>
+
+
+                                    <div *ngIf="notificacion.tipo_notificacion ==='REACCION_ME_ENTRISTECE' "
+                                        style="height: 20px;" class="col-2 col-sm-2 col-md-2 text-center ">
+                                        <h2 class="bg_notif_comment container_ic_notifi">
+                                            <h4 class="align-self-center">
+                                                <i class="mt-3 fas fa-comment-alt"></i>
+                                                <img class="mt-3 ic_notif_reacciones" src="../../assets/sad.ico"
+                                                    width="25px" height="25px" alt="">
+                                            </h4>
+                                        </h2>
+                                    </div>
+
+                                    <div *ngIf="notificacion.tipo_notificacion ==='REACCION_ME_SORPRENDE' "
+                                        style="height: 20px;" class="col-2 col-sm-2 col-md-2 text-center ">
+                                        <h2 class="bg_notif_comment container_ic_notifi">
+                                            <h4 class="align-self-center">
+                                                <i class="mt-3 fas fa-comment-alt"></i>
+                                                <img class="mt-3 ic_notif_reacciones" src="../../assets/wow.ico"
+                                                    width="25px" height="25px" alt="">
+                                            </h4>
+                                        </h2>
+                                    </div>
+
+
+
+                                    <!--REACCIONES EN PUBLICACIONES-->
+                                    <div *ngIf="notificacion.tipo_notificacion ==='P_REACCION_ME_ENFADA' "
+                                        style="height: 20px;" class="col-2 col-sm-2 col-md-2 text-center ">
+                                        <h2 class="bg_notif_pub container_ic_notifi">
+                                            <h4 class="align-self-center">
+                                                <i class="mt-3 far fa-image"></i>
+                                                <img class="mt-3 ic_notif_reacciones" src="../../assets/angry.ico"
+                                                    width="25px" height="25px" alt="">
+                                            </h4>
+                                        </h2>
+                                    </div>
+
+                                    <div *ngIf="notificacion.tipo_notificacion ==='P_REACCION_ME_DIVIERTE' "
+                                        style="height: 20px;" class="col-2 col-sm-2 col-md-2 text-center ">
+                                        <h2 class="bg_notif_pub container_ic_notifi">
+                                            <h4 class="align-self-center">
+                                                <i class="mt-3 far fa-image"></i>
+                                                <img class="mt-3 ic_notif_reacciones" src="../../assets/haha.ico"
+                                                    width="25px" height="25px" alt="">
+                                            </h4>
+                                        </h2>
+                                    </div>
+
+                                    <div *ngIf="notificacion.tipo_notificacion ==='P_REACCION_ME_GUSTA' "
+                                        style="height: 20px;" class="col-2 col-sm-2 col-md-2 text-center ">
+                                        <h2 class="bg_notif_pub container_ic_notifi">
+                                            <h4 class="align-self-center">
+                                                <i class="mt-3 far fa-image"></i>
+                                                <img class="mt-3 ic_notif_reacciones" src="../../assets/like.ico"
+                                                    width="25px" height="25px" alt="">
+                                            </h4>
+                                        </h2>
+                                    </div>
+
+                                    <div *ngIf="notificacion.tipo_notificacion ==='P_REACCION_ME_ENCANTA' "
+                                        style="height: 20px;" class="col-2 col-sm-2 col-md-2 text-center ">
+                                        <h2 class="bg_notif_pub container_ic_notifi">
+                                            <h4 class="align-self-center">
+                                                <i class="mt-3 far fa-image"></i>
+                                                <img class="mt-3 ic_notif_reacciones" src="../../assets/love.ico"
+                                                    width="25px" height="25px" alt="">
+                                            </h4>
+                                        </h2>
+                                    </div>
+
+
+                                    <div *ngIf="notificacion.tipo_notificacion ==='P_REACCION_ME_ENTRISTECE' "
+                                        style="height: 20px;" class="col-2 col-sm-2 col-md-2 text-center ">
+                                        <h2 class="bg_notif_pub container_ic_notifi">
+                                            <h4 class="align-self-center">
+                                                <i class="mt-3 far fa-image"></i>
+                                                <img class="mt-3 ic_notif_reacciones" src="../../assets/sad.ico"
+                                                    width="25px" height="25px" alt="">
+                                            </h4>
+                                        </h2>
+                                    </div>
+
+                                    <div *ngIf="notificacion.tipo_notificacion ==='P_REACCION_ME_SORPRENDE' "
+                                        style="height: 20px;" class="col-2 col-sm-2 col-md-2 text-center ">
+                                        <h2 class="bg_notif_pub container_ic_notifi">
+                                            <h4 class="align-self-center">
+                                                <i class="mt-3 far fa-image"></i>
+                                                <img class="mt-3 ic_notif_reacciones" src="../../assets/wow.ico"
+                                                    width="25px" height="25px" alt="">
+                                            </h4>
+                                        </h2>
+                                    </div>
+
+                                    <div class="col-10 col-sm-10 col-md-10">
+                                        <div class="">
+                                            <p class="mr-3"><strong>{{notificacion.name_from_usuario}}</strong>
+                                                {{notificacion.descripcion}}
+                                            </p>
+
+                                        </div>
+                                        <div class="text-right" style="margin-top: -10px; height: 20px;">
+                                            {{notificacion.fecha_not}}
+                                        </div>
+                                        <div class="mt-2 text-center"
+                                            *ngIf="notificacion.tipo_notificacion ==='SEGUIR_A'">
+                                            <button class="btn btn-info mr-2"
+                                                (click)="AceptarSolicitud(notificacion.from_usuario, notificacion.to_usuario)">Aceptar</button>
+                                            <button class="btn btn-danger"
+                                                (click)="RechazarSolicitud(notificacion.from_usuario, notificacion.to_usuario)">Rechazar</button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <hr>
+                            </div>
+                        </div>
+
+                    </a>
+                </div>
+            </div>
+
+            <!--Menu Perfil-->
+            <div>
+                <a class="navbar-brand " style="color: black;" id="userDropdown" role="button" data-toggle="dropdown"
+                    aria-haspopup="true" aria-expanded="false">
+                    <span class="d-none d-lg-inline text-gray-600 small"></span>
+                    <i class="fas fa-user-circle"></i>
+                </a>
+
+                <!-- Dropdown - User Information -->
+                <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
+                    <a [routerLink]="['/perfil/'+id_user_current]" class="dropdown-item" href="#">
+                        <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i> Perfil
+                    </a>
+                    <a [routerLink]="['/bloqueados']" class="dropdown-item" href="#">
+                        <i class="fas fa-user-slash fa-sm fa-fw mr-2 text-gray-400"></i> Usuarios Bloqueados
+                    </a>
+                    <a [routerLink]="['/editprofile']" class="dropdown-item" href="#">
+                        <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i> Ajustes
+                    </a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" (click)="Logout()" href="#" data-toggle="modal" data-target="#logoutModal">
+                        <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i> Cerrar sesión
+                    </a>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+</div>

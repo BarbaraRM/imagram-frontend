@@ -1,0 +1,107 @@
+<div class="container-fluid">
+
+
+  <div class="row justify-content-center mt-5">
+    <h1><strong>Descubre nuevas tendencias</strong> </h1>
+  </div>
+
+  <div class="row justify-content-center">
+    <div class="col-12">
+      <div class="scrolling-wrapper row flex-row flex-nowrap justify-content-center mt-4">
+        <div class="ml-5 mr-3 justify-content-center mt-2" style="cursor: pointer;">
+          <button class="btn btn-outline-dark" (click)="ObtenerPublicacionesHashtag('todas')">#todas</button>
+        </div>
+        <div class="mb-5" *ngFor="let hashtag of lista_hashtags">
+          <div class="col-2 justify-content-center mt-2" style="cursor: pointer;">
+            <button class="btn btn-outline-dark"
+              (click)="ObtenerPublicacionesHashtag(hashtag.hashtag)">#{{hashtag.hashtag}}</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!--AQUI SALES LAS ALEATORIAS-->
+  <div class="row flex-row justify-content-center" id="pub_aleatorias">
+    <div class="row mr-4 mb-4" *ngFor="let publicaciona of lista_aletorias">
+      <div class="col-md-12">
+
+        <div class="row" style="margin-bottom: -70px; color: white;">
+          <div class="col-2 col-sm-2 col-md-2 text-center">
+            <img class="rounded-circle" src={{publicaciona.url_foto_perfil}} width="40px" height="40px" alt=""
+              style="border-color: white; border-width: 1px; border: solid;">
+          </div>
+          <div class="col-6 col-sm-6 col-md-6">
+            <h3>@{{publicaciona.publicada_por}}</h3>
+            <p style="margin-top: -20px;">{{publicaciona.nombres}}</p>
+          </div>
+          <div class="col-2 col-sm-2 col-md-2">
+            <button class="btn btn-outline-light">Seguir</button>
+          </div>
+        </div>
+
+        <div class="row justify-content-center" *ngIf="IdentificarExtension(publicaciona.url_pub_fv)=='IMAGEN'">
+          <img src={{publicaciona.url_pub_fv}} width="300px" height="300px" alt="">
+        </div>
+        <div class="row justify-content-center" *ngIf="IdentificarExtension(publicaciona.url_pub_fv)=='VIDEO'">
+          <video width="300px" height="300px" src={{publicaciona.url_pub_fv}} controls></video>
+        </div>
+        <div class="row ml-2" style="margin-top: -30px; margin-bottom: 5px; color: white;">
+          <p>#{{publicaciona.hashtag}}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!--AQUI SALEN LAS QUE UTILIZAN UN HASHTAG DETERMINADO-->
+
+  <div class="row flex-row justify-content-center" id="pub_hashtag">
+    <div class="row mr-4 mb-4" *ngFor="let publicacion of lista_pubhash">
+      <div class="col-md-12">
+
+        <div class="row" style="margin-bottom: -70px; color: white;">
+          <div class="col-md-2 text-center">
+            <img class="rounded-circle" src={{publicacion.url_foto_perfil}} width="40px" height="40px" alt=""
+              style="border-color: white; border-width: 1px; border: solid;">
+          </div>
+          <div class="col-md-6">
+            <h3>@{{publicacion.publicada_por}}</h3>
+            <p style="margin-top: -20px;">{{publicacion.nombres}}</p>
+          </div>
+          <div class="col-md-2">
+            <button class="btn btn-outline-light">Seguir</button>
+          </div>
+        </div>
+        <div class="row justify-content-center" *ngIf="IdentificarExtension(publicacion.url_pub_fv)=='IMAGEN'">
+          <img src={{publicacion.url_pub_fv}} width="300px" height="300px" alt="">
+        </div>
+        <div class="row justify-content-center" *ngIf="IdentificarExtension(publicacion.url_pub_fv)=='VIDEO'">
+          <video width="300px" height="300px" src={{publicacion.url_pub_fv}} controls></video>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+
+  <!--
+  <div class="col-md-12 text-center">
+
+    <div class="row d-inline" *ngFor="let publicacion of lista_pubhash">
+      <div *ngIf="IdentificarExtension(publicacion.url_pub_fv)=='IMAGEN'" class="col-dm-3 d-inline mr-5 text-center">
+        <img width="250px" class="mb-3" height="250px" src={{publicacion.url_pub_fv}} alt="" />
+      </div>
+
+
+      <div *ngIf="IdentificarExtension(publicacion.url_pub_fv)=='VIDEO'" class="d-inline mr-5 mb-3 text-center">
+        <video width="300px" class="mb-3" height="300px" src={{publicacion.url_pub_fv}} alt="publicacion"
+          controls></video>
+      </div>
+
+      <p class="btn_upload">{{publicacion.publicada_por}}</p>
+    </div>
+  </div>-->
+
+</div>

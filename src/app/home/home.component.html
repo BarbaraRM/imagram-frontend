@@ -1,0 +1,98 @@
+<div class="container-fluid bg-light">
+
+    <div class="row">
+        <div class="col-md-1 col-lg-1 col-xl-1 d-none d-md-block d-lg-block d-xl-block">
+            <!--ESTA SE OCULTA EN LA VISTA MOVIL-->
+        </div>
+
+        <!--HISTORIAS Y PUBLICACIONES-->
+        <div class="col-12 col-sm-12 col-md-12 col-lg-7 col-xl-7 text-center">
+
+            <div class="scrolling-wrapper row flex-row flex-nowrap imagram-historias">
+                <app-historias [idUser]="mishistorias.user" [publicadaPor]="mishistorias.name" [lista]="mishistorias.listaHistorias" [cantVistos]="1" [foto]="mishistorias.foto">
+                </app-historias>
+
+                <!--AQUI HACER UN FOR Y ENVIARLE LOS PARAMETROS A LA HISTORIA  (ID_HISTORIA, FOTO_PERFIL_USUARIO Y NOMBRE_USUARIO)-->
+
+                <div *ngFor="let historia of historias">
+                    <app-historias [idUser]="historia.user" [publicadaPor]="historia.name" [lista]="historia.listaHistorias" [cantVistos]="0" [foto]="historia.foto">
+                    </app-historias>
+                </div>
+
+            </div>
+
+            <!--PUBLICACIONES-->
+            <div *ngFor="let publicacion of publicaciones">
+
+                <app-publicacion [id_publicacion]="publicacion.id_publicacion" [id_user]="publicacion.id_user"
+                    [usuario]="publicacion.publicada_por" [imagen]="publicacion.url_pub_fv"
+                    [descripcion]="publicacion.descripcion" [fecha]="publicacion.fecha_pub"
+                    [img_perfil]="publicacion.url_foto_perfil" [cant_megusta]="publicacion.cant_megusta"
+                    [cant_meencanta]="publicacion.cant_meencanta" [cant_meentristece]="publicacion.cant_meentristece"
+                    [cant_meenfada]="publicacion.cant_meenfada" [cant_medivierte]="publicacion.cant_medivierte"
+                    [cant_mesorprende]="publicacion.cant_mesorprende" [cant_comentarios]="publicacion.cant_comentarios"
+                    [reaccion_usada]="publicacion.reaccion_usada" [comentarios]="publicacion.comentarios"
+                    [guardada]="publicacion.guardada">
+
+                </app-publicacion>
+            </div>
+
+
+            <br><br><br><br>
+
+        </div>
+
+
+
+        <!--SUGERENCIAS-->
+        <div class="col-md-3 col-lg-3 col-xl-3 d-none d-md-none d-lg-block d-xl-block">
+
+            <div class="card card-body sugerencias">
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="row">
+                            <div class="col-md-2 col-lg-2">
+                                <img class="rounded-circle" width="50px" height="50px" src={{usuario_info.url_foto_perfil}} fallback="https://unsplash.com/photos/rDEOVtE7vOs">
+                            </div>
+                            <div class="col-md-6">
+                                <h3 class="mb-0 ml-2"><strong>@{{usuario_info.usuario}}</strong> </h3>
+                                <p class="form-text text-muted ml-2">{{usuario_info.nombres}} {{usuario_info.apellidos}}
+                                </p>
+                            </div>
+
+                            <div class="col-md-4 align-self-center text-center">
+                                <a [routerLink]="['/perfil/'+id_user_current]" role="button" class="derecha text-primary">Ver Perfil</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="mt-2 mb-2">
+                    <h4 class="form-text text-muted">Sugerencia para ti</h4>
+                    <div *ngFor="let sugerencia of lista_sugerencias">
+                        <app-sugerencias [nombres]="sugerencia.nombres" [usuario]="sugerencia.usuario"
+                            [foto]="sugerencia.url_foto_perfil"></app-sugerencias>
+                    </div>
+                </div>
+
+
+
+                <div *ngFor="let sugerencia of lista_sugerencias">
+                    <app-sugerencias [nombres]="sugerencia.nombres" [usuario]="sugerencia.usuario" [foto]="sugerencia.url_foto_perfil"></app-sugerencias>
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="col-md-1 col-lg-1 col-xl-1 d-none d-md-block d-lg-block d-xl-block">
+            <!--ESTA SE OCULTA EN LA VISTA MOVIL-->
+        </div>
+
+
+
+    </div>
+
+</div>

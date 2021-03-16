@@ -1,0 +1,30 @@
+<div class="col-12 col-sm-12 col-md-10 col-lg-8 col-xl-6 card card-body mx-auto mt-5">
+    <div class="text-center">
+        <h2>Lista de usuarios bloqueados</h2>
+        <hr>
+    </div>
+
+    <div id='lista_bloqueados' class="row mb-3" *ngFor="let bloqueado of lista_bloqueados">
+
+        <div class="col-2 col-sm-2 col-md-2 col-lg-2 col-xl-2 text-center">
+            <img class="rounded-circle" width="50px" height="50px" src={{bloqueado.url_foto_perfil}}
+                fallback="https://unsplash.com/photos/rDEOVtE7vOs">
+        </div>
+
+        <div class="col-5 col-sm-5 col-md-7 col-lg-7 col-xl-7 align-self-center">
+            <h2 class="mb-0 ml-2">@{{bloqueado.usuario}}</h2>
+            <h4 class="form-text text-muted ml-2">{{bloqueado.nombre_usuario}}</h4>
+        </div>
+
+        <div class="col-2 col-sm-2 col-md-2 col-lg-2 col-xl-2 align-self-center mr-2">
+            <button class="btn btn-outline-info" (click)="DesbloquearUsuario(bloqueado.follow_to)">Desblosquear</button>
+        </div>
+
+    </div>
+
+
+    <div id="no_bloqueados" class="text-center" style="display: none;">
+        <img src="../../assets/user.png" width="100px" height="100px" class="img-fluid" alt="">
+        <h2 class="text-muted">No tienes usuarios bloqueados</h2>
+    </div>
+</div>

@@ -1,0 +1,12 @@
+.imagram-navbar2 {
+    height: 45px;
+    border-bottom-color: rgb(190, 189, 189);
+    border-bottom-style: solid;
+    border-bottom-width: 1px;
+    background-color: white;
+}
+
+.imagran-nombre {
+    font-family: 'Pacifico', cursive;
+    font-size: 150%;
+}

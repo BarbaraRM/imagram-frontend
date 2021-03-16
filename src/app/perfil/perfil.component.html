@@ -1,0 +1,219 @@
+<div class="container-fluid" style="background-color: rgb(255, 255, 255);">
+
+  <div class="row  justify-content-center">
+    <div class=" col-12 col-sm-12 col-md-12 col-lg-9 col-xl-9">
+      <img class="p_portada " src={{usuario.url_foto_portada}} alt="" />
+    </div>
+
+
+    <div class="cportada">
+      <span style="cursor: pointer;" class="btn_upload_portada">
+        <input type="file" id="f_portada" (change)="SubirFotoPortada()">
+        <i style="cursor: pointer; margin-left: 10px;" class="fas fa-camera mt-2"></i>
+      </span>
+    </div>
+
+
+  </div>
+
+  <div class="row text-center">
+    <div class="cportada col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 ">
+      <div class="">
+        <img class="rounded-circle p_perfil" src={{usuario.url_foto_perfil}} alt="" />
+      </div>
+
+      <div>
+        <span style="cursor: pointer;" class="btn_upload">
+          <input type="file" id="f_perfil" (change)="SubirFotoPerfil()">
+          <i style="cursor: pointer;" class="fas fa-camera mt-2"></i>
+        </span>
+      </div>
+
+    </div>
+  </div>
+
+
+  <div class="row mt-3 mb-3 justify-content-center">
+
+    <div class="col-12 col-sm-12 col-md-4 col-lg-4 col-xl-4 ">
+      <div>
+        <h2 class="">{{usuario.nombre_completo}}</h2>
+      </div>
+
+      <div>
+        <h3 class="">@{{usuario.usuario}}</h3>
+      </div>
+    </div>
+
+    <div class="col-12 col-sm-12 col-md-4 col-lg-4 col-xl-4 align-self-center">
+      <div class="row justify-content-center">
+        <button class="btn btn-outline-dark mr-2">{{usuario.cant_publicaciones}} Post</button>
+        <button id="btn_seguidores" class="btn btn-outline-dark mr-2" data-toggle="modal"
+          data-target="#modal_seguidores">{{usuario.cant_seguidores}} Seguidores</button>
+
+        <button id="btn_seguidos" class="btn btn-outline-dark mr-2" data-toggle="modal"
+          data-target="#modal_seguidos">{{usuario.cant_seguidos}} Seguidos</button>
+
+        <button id="btn_bloquear" class="btn btn-outline-dark mr-2" (click)="BloquearUsuario()"><i
+            class="fas fa-user-slash"></i></button>
+
+        <button id="btn_seguir" style="display: none; width: 200px;" class="btn btn-outline-dark mr-2"
+          (click)="SeguirA()"><i class="fas fa-user-plus"></i> Seguir</button>
+
+      </div>
+    </div>
+
+
+  </div>
+
+
+  <!--INFORMACION BASICA-->
+  <div class="row justify-content-center">
+    <div class="col-md-8 col-lg-8 col-xl-8 card card-body">
+      <div class="mx-auto mb-3">
+        <p class="">"{{usuario.biografia}}"</p>
+      </div>
+
+      <p class="txt-name"><i class="fas fa-map-marker-alt"></i> {{usuario.ubicacion}}</p>
+      <p class="txt-name"><i class="fas fa-birthday-cake"></i> {{usuario.fecha_nacim}}</p>
+      <p class="txt-name"><i class="fas fa-envelope"></i> {{usuario.correo}}</p>
+      <p class="txt-name"><i class="fas fa-suitcase"></i> {{usuario.trabajo}}</p>
+      <p class="txt-name"><i class="fas fa-user-graduate"></i> {{usuario.estudio}}</p>
+    </div>
+  </div>
+
+
+  <!--PUBLICACIONES-->
+  <div class="row mt-5">
+
+    <div class="col-md-12">
+      <ul class="nav nav-tabs mb-5 justify-content-center" id="pills-tab" role="tablist">
+        <li class="nav-item " role="presentation">
+          <a class="nav-link active" id="pills-home-tab" data-toggle="pill" href="#pills-home" role="tab"
+            aria-controls="pills-home" aria-selected="true">Publicaciones</a>
+        </li>
+        <li class="nav-item " role="presentation">
+          <a class="nav-link" id="pills-profile-tab" data-toggle="pill" href="#pills-profile" role="tab"
+            aria-controls="pills-profile" aria-selected="false">Guardadas</a>
+        </li>
+
+      </ul>
+    </div>
+
+    <div class="tab-content" id="pills-tabContent">
+
+      <!--PUBLICACIONES-->
+      <div class="tab-pane fade show active text-center " id="pills-home" role="tabpanel"
+        aria-labelledby="pills-home-tab">
+
+        <div class="row d-inline" *ngFor="let publicacion of lista_publicaciones_creadas">
+          <div *ngIf="IdentificarExtension(publicacion.url_pub_fv)=='IMAGEN'" class="d-inline mr-5  ">
+            <img width="300px" class="mb-3" height="300px" src={{publicacion.url_pub_fv}} alt="" />
+          </div>
+
+          <div *ngIf="IdentificarExtension(publicacion.url_pub_fv)=='VIDEO'" class="d-inline mr-5 mb-3 ">
+            <video width="300px" class="mb-3" height="300px" src={{publicacion.url_pub_fv}} alt="publicacion"
+              controls></video>
+          </div>
+        </div>
+
+      </div>
+
+      <!--PUBLICACIONES GUARDADAS-->
+      <div class="tab-pane fade text-center" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
+
+        <div class="row d-inline" *ngFor="let publicaciong of lista_publicaciones_guardadas">
+          <div *ngIf="IdentificarExtension(publicaciong.url_pub_fv)=='IMAGEN'" class="d-inline mr-5  ">
+            <img width="300px" class="mb-3" height="300px" src={{publicaciong.url_pub_fv}} alt="" />
+          </div>
+
+          <div *ngIf="IdentificarExtension(publicaciong.url_pub_fv)=='VIDEO'" class="d-inline mr-5 mb-3 ">
+            <video width="300px" class="mb-3" height="300px" src={{publicaciong.url_pub_fv}} alt="publicacion"
+              controls></video>
+          </div>
+        </div>
+
+      </div>
+
+
+    </div>
+  </div>
+
+
+  <!--MODAL SEGUIDOS-->
+  <div class="modal fade" id="modal_seguidos" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+      <div class="modal-content">
+        <div class="container">
+          <div class="col-md-12 text-left">
+            <div class="modal-header mb-2">
+              <h2>Seguidos</h2>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+
+            <div class="" *ngFor="let seguido of lista_seguidos">
+
+              <div class="row mt-3">
+                <div class="col-md-2 col-lg-2">
+                  <img class="rounded-circle" width="50px" height="50px" src={{seguido.url_foto_perfil}}
+                    fallback="https://unsplash.com/photos/rDEOVtE7vOs">
+                </div>
+
+                <div class="col-md-10">
+                  <h3 class="mb-0 ml-2">@{{seguido.usuario}}</h3>
+                  <p class="form-text text-muted ml-2">{{seguido.nombre_usuario}}
+                  <p>
+                </div>
+              </div>
+
+            </div>
+            <br><br>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!--MODAL SEGUIDORES-->
+  <div class="modal fade" id="modal_seguidores" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+      <div class="modal-content">
+        <div class="container">
+          <div class="col-md-12 text-left">
+            <div class="modal-header mb-2">
+              <h2>Seguidores</h2>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+
+            <div class="" *ngFor="let seguidores of lista_seguidores">
+
+              <div class="row mt-3">
+                <div class="col-md-2 col-lg-2">
+                  <img class="rounded-circle" width="50px" height="50px" src={{seguidores.url_foto_perfil}}
+                    fallback="https://unsplash.com/photos/rDEOVtE7vOs">
+                </div>
+
+                <div class="col-md-10">
+                  <h3 class="mb-0 ml-2">@{{seguidores.usuario}}</h3>
+                  <p class="form-text text-muted ml-2">{{seguidores.nombre_usuario}}</p>
+                </div>
+              </div>
+
+            </div>
+            <br><br>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+
+
+</div>

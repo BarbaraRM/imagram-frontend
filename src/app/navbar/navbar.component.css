@@ -1,0 +1,123 @@
+.imagram-navbar {
+    height: 45px;
+    border-bottom-color: rgb(190, 189, 189);
+    border-bottom-style: solid;
+    border-bottom-width: 1px;
+    background-color: white;
+}
+
+.imagran-nombre {
+    font-family: 'Pacifico', cursive;
+    font-size: 150%;
+}
+
+.bg_notif_comment {
+    position: relative;
+    background-color: green;
+    border-radius: 100px;
+    color: white;
+    width: 50px;
+    height: 50px;
+}
+
+.bg_notif_conf_solic {
+    position: relative;
+    background-color: rgb(6, 132, 190);
+    border-radius: 100px;
+    color: white;
+    width: 50px;
+    height: 50px;
+}
+
+.bg_notif_pub {
+    position: relative;
+    background-color: rgb(8, 5, 190);
+    border-radius: 100px;
+    color: white;
+    width: 50px;
+    height: 50px;
+}
+
+.container_ic_notifi {
+    position: relative;
+}
+
+.ic_notif {
+    top: 60px;
+    color: white;
+}
+
+.ic_notif_reacciones {
+    position: absolute;
+    top: 15px;
+    color: white;
+    right: -5px;
+}
+
+.notificacion {
+    overflow-y: scroll;
+    height: 400px;
+    width: 100%;
+}
+
+.notificacion::-webkit-scrollbar {
+    /* solo oculta su visualizacion */
+    display: none;
+}
+
+/*.notificacion:hover {
+    background-color: rgb(240, 238, 235);
+    border-radius: 20px;
+    height: 80px;
+}*/
+
+.dropdown-item:hover {
+    background-color: white;
+}
+
+@media (min-width: 300px) {
+    .imagram-navbar {
+        position: fixed;
+        bottom: 0;
+        width: 100%;
+        border-top-color: rgb(190, 189, 189);
+        border-top-style: solid;
+        border-top-width: 1px;
+        background-color: white;
+    }
+}
+
+/*Small devices (landscape phones, 576px and up)*/
+
+@media (min-width: 576px) {}
+
+/*Medium devices (tablets, 768px and up)*/
+
+@media (min-width: 768px) {
+    .imagram-navbar {
+        position: sticky;
+        top: 0;
+        width: 100%;
+        z-index: 1;
+    }
+}
+
+/*Large devices (desktops, 992px and up)*/
+
+@media (min-width: 992px) {
+    .imagram-navbar {
+        position: sticky;
+        top: 0;
+        width: 100%;
+    }
+}
+
+/*Extra large devices (large desktops, 1200px and up)*/
+
+@media (min-width: 1200px) {
+    .imagram-navbar {
+        position: sticky;
+        top: 0;
+        width: 100%;
+    }
+}

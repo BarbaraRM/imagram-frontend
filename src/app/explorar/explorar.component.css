@@ -1,0 +1,292 @@
+.scrolling-wrapper {
+	overflow-x: auto;
+}
+
+::-webkit-scrollbar {
+	display: none;
+}
+
+.padre {
+	position: relative;
+}
+
+.cportada {
+	position: relative;
+}
+
+.btn_upload {
+	background-color: #000;
+	color: white;
+	height: 40px;
+	width: 40px;
+	font-size: 20px;
+	border-radius: 100%;
+	border-color: #000;
+	border-width: 2px;
+	margin-top: -50px;
+	margin-left: 30px;
+	z-index: 2;
+	position: absolute;
+	text-decoration: none;
+	overflow: hidden;
+}
+
+.encabezado {
+	position: absolute;
+	background-color: black;
+	top: 0;
+	left: 0;
+	right: 0;
+	margin: 0 auto;
+	margin-right: -2px;
+}
+
+.footer {
+	position: absolute;
+	top: 600px;
+	left: 0;
+	right: 0;
+	margin: 0 auto;
+	margin-right: -2px;
+}
+
+.modal {
+	background-color: rgba(0, 0, 0, 0.7);
+}
+
+.entrar-modal {
+	display: flex;
+}
+
+.sub-modal {
+	width: 400px;
+	height: 384px;
+	background: white;
+	border-radius: 15px;
+}
+
+.container-all-profile {
+	max-width: 1000px;
+	width: 95%;
+	margin: auto;
+	height: auto;
+	/*background: red;*/
+	/*border: 1px solid rgba(0,0,0,0.1);*/
+}
+
+.container-info-profile {
+	width: 100%;
+	height: 250px;
+	/*background-color: grey;*/
+	display: flex;
+	/*border-bottom:1px solid  rgba(0,0,0,0.1);*/
+}
+
+.container-profile-picture {
+	min-width: 290px;
+	height: 250px;
+	/*background-color: red;*/
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.container-img-profile {
+	width: 150px;
+	height: 150px;
+	display: flex;
+	justify-content: center;
+	align-items: baseline;
+	overflow: hidden;
+	border-radius: 100%;
+	grid-area: foto;
+}
+
+.container-img-profile img {
+	width: 100%;
+}
+
+.container-profile-info {
+	width: 100%;
+	height: 260px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	padding: 5px 70px;
+}
+
+.sub-container-profile-info {
+	height: 150px;
+	width: 100%;
+	display: grid;
+	grid-template-columns: 200px 130px 89px 35px;
+	grid-template-areas: "foto username buttonedit buttonconfig" "foto counters buttonedit buttonconfig" "foto infoprofile  buttonedit buttonconfig";
+	/*background: red;*/
+}
+
+.container-username {
+	grid-area: username;
+}
+
+.container-editprofile {
+	grid-area: buttonedit;
+}
+
+.container-buttonconfig {
+	grid-area: buttonconfig;
+}
+
+.section-info-username {
+	display: flex;
+}
+
+.txt-username {
+	font-size: 23px;
+	font-family: serif;
+	color: rgba(0, 0, 0, 0.60);
+	margin-right: 10px;
+	font-family: arial;
+	color: #262626;
+}
+
+.link-txt-edit-profile {
+	text-decoration: none;
+	border: 1px solid rgba(0, 0, 0, 0.16);
+	padding: 5px 7px;
+	border-radius: 4px;
+	font-family: arial;
+	font-weight: 600;
+	font-size: 13px;
+	color: #262626;
+}
+
+.section-info-name {
+	grid-area: infoprofile;
+}
+
+.section-info-follows {
+	display: flex;
+	grid-area: counters;
+}
+
+.section-info-follows span {
+	margin-right: 5px;
+}
+
+.section-info-follows div {
+	margin: 15px 15px 15px 0px;
+	font-size: 15px;
+	font-family: arial;
+	display: flex;
+}
+
+.section-info-name div {
+	font-family: arial;
+}
+
+.txt-name {
+	font-family: arial;
+	color: rgba(0, 0, 0, 0.67);
+	margin-bottom: 5px;
+	display: block;
+	width: 330px;
+}
+
+.link-website {
+	color: #003569;
+	color: #205992;
+	text-decoration: none;
+}
+
+/*estilos de los posts*/
+
+.listPost {
+	display: grid;
+	grid-template-columns: repeat(3, minmax(100px, 290px));
+	grid-gap: 30px;
+	justify-content: center;
+}
+
+.post {
+	cursor: pointer;
+	display: block;
+	border: 1px solid rgba(0, 0, 0, 0.1);
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	overflow: hidden;
+	position: relative;
+	width: auto;
+}
+
+.post-image {
+	margin: 0;
+}
+
+.post-image img {
+	width: 100%;
+	vertical-align: top;
+}
+
+.overlay {
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	top: 0;
+	left: 0;
+	background: rgba(0, 0, 0, 0.4);
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	color: white;
+	display: none;
+	transition: all 0.5s;
+}
+
+.overlay span {
+	padding: 0 10px;
+	margin: 0 3px;
+}
+
+.post:hover .overlay {
+	display: flex;
+}
+
+@media screen and (max-width: 768px) {
+	.sub-container-profile-info {
+		grid-template-columns: 100px 116px 35px;
+		grid-template-areas: "foto username  buttonconfig  " "foto buttonedit  buttonconfig " "infoprofile infoprofile infoprofile  " "counters counters counters";
+		/*background: red;*/
+	}
+	.listPost {
+		grid-gap: 3px;
+	}
+	.container-profile-info {
+		padding: 0 0;
+	}
+	.container-img-profile {
+		width: 80px;
+		height: 80px;
+		display: flex;
+		justify-content: center;
+		align-items: baseline;
+		overflow: hidden;
+		border-radius: 100%;
+	}
+	.section-info-follows {
+		margin: -16px 0;
+	}
+	.container-profile-picture {
+		min-width: 100px;
+		height: 151px;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+	}
+	.section-info-name {
+		margin: 10px 0;
+	}
+	.link-txt-edit-profile {
+		display: block;
+	}
+}

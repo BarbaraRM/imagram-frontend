@@ -1,0 +1,101 @@
+<div id="cont_form" class="row">
+    <div class="col-sm-2"></div>
+    <div class="col-sm-8">
+        <div class="main-content">
+            <div class="card-header">
+                Resgistrate gratis
+            </div>
+            <div class="card-body" id="marcos">
+                <form (submit)="addUsuarios()">
+                    <div class="input-group">
+                        <span class="input-group-text" id="basic-addon1">🖊</span>
+                        <input type="text" class="form-control" placeholder="Nombre" name="nombres" required="required" [(ngModel)]="user.nombres">
+                    </div><br>
+                    <div class="input-group">
+                        <span class="input-group-text" id="basic-addon1">🖊</span>
+                        <input type="text" class="form-control" placeholder="Apellido" name="apellidos" required="required" [(ngModel)]="user.apellidos">
+                    </div><br>
+                    <div class="input-group">
+                        <span class="input-group-text" id="basic-addon1">📨</span>
+                        <input type="email" class="form-control" placeholder="Correo electrónico" name="correo" required="required" [(ngModel)]="user.correo">
+                    </div><br>
+                    <!-- usuario -->
+                    <div class="input-group">
+                        <span class="input-group-text" id="basic-addon1">👤</span>
+                        <input type="text" class="form-control" placeholder="Usuario" name="usuario" required="required" [(ngModel)]="user.usuario">
+                    </div><br>
+                    <div class="input-group">
+                        <span class="input-group-text" id="basic-addon1">🔐</span>
+                        <input type="password" class="form-control" placeholder="Contraseña" name="password" required="required" [(ngModel)]="user.password">
+                    </div><br>
+                    <!-- telefono -->
+                    <div class="input-group">
+                        <span class="input-group-text" id="basic-addon1">📱</span>
+                        <input type="text" class="form-control" placeholder="Telefono" name="telefono" required="required" [(ngModel)]="user.telefono">
+                    </div><br>
+
+                    <!-- trabajo -->
+                    <div class="input-group">
+                        <span class="input-group-text" id="basic-addon1">📱</span>
+                        <input type="text" class="form-control" placeholder="Trabajo" name="trabajo" required="required" [(ngModel)]="user.trabajo">
+                    </div><br>
+
+                    <!-- estudio -->
+                    <div class="input-group">
+                        <span class="input-group-text" id="basic-addon1">📱</span>
+                        <input type="text" class="form-control" placeholder="Estudio" name="estudio" required="required" [(ngModel)]="user.estudio">
+                    </div><br>
+
+                    <!-- biografia -->
+                    <div class="input-group">
+                        <span class="input-group-text" id="basic-addon1">📱</span>
+                        <input type="text" class="form-control" placeholder="Biografia" name="biografia" required="required" [(ngModel)]="user.biografia">
+                    </div><br>
+
+
+                    <div class="input-group">
+                        <span class="input-group-text">Selecciona tu Ciudad</span>
+                        <select class="form-control" name="id_ciudad" required="required" [(ngModel)]="user.id_ciudad">
+                            <option value="2">Machala</option>
+                            <option value="1">Pasaje</option>
+                            </select>
+                    </div><br>
+                    <div class="input-group">
+                        <span class="input-group-text">Selecciona tu sexo</span>
+                        <select class="form-control input-md" name="user_gender" required="required" [(ngModel)]="user.user_gender">
+                            <option>Hombre</option>
+                            <option>Mujer</option>
+                            <option>Prefiero no decirlo</option>
+                        </select>
+                    </div><br>
+                    <div class="input-group">
+                        <span class="input-group-text">🎂</span>
+                        <input type="date" class="form-control input-md" placeholder="Fecha de nacimiento" name="user_birth" required="required" [(ngModel)]="user.user_birth">
+                    </div><br>
+                    <div id="centrado">
+                        <button id="signup" class="btn btn-info btn-lg">Regístrate</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-2"></div><br>
+</div>
+
+<div id="cont_codigo" class="row mt-5 " style="display: none;">
+
+    <div class="col-4 col-sm-4 col-md-4 mx-auto">
+        <div class="card">
+            <h6 class="mt-5 text-center">Ingrese el código de verificacion enviado a su correo</h6>
+            <div class="container">
+                <input class="form-control mt-5 mb-2" id="txt_codigo" type="text" placeholder="Ingrese el código de verificacion">
+            </div>
+
+            <div class="row justify-content-center mt-3 mb-5">
+                <button class="btn btn-outline-dark mr-2" (click)="VerificarCodigo()">Verificar</button>
+                <button class="btn btn-outline-dark" (click)="Omitir()">Omitir</button>
+            </div>
+
+        </div>
+    </div>
+</div>

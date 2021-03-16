@@ -1,0 +1,49 @@
+<div mat-dialog-content>
+    <div class="col content">
+        <!--AQUI SE VISUALIZA LA IMAGEN O VIDEO-->
+        <div class="row encabezado">
+            <div class="col-2 fotoPerfil">
+                <img class="rounded-circle" width="40px" height="40px" src={{this.foto}} fallback="https://unsplash.com/photos/rDEOVtE7vOs">
+            </div>
+            <div class="col infoPerfil">
+                <h4 class="mb-0 ml-1" id="publicaPor">{{this.publicadaPor}}</h4>
+            </div>
+            <div class="col-1 col-sm-2 col-md-2 col-lg-2 col-xl-2 align-self-center text-right">
+                <a *ngIf="idUser == id_usuario_actual" role="button" class="nav-item text-right  mr-3" style="color: black;" (click)="EliminarHistoria(Todashistorias.id_historia, Todashistorias.id_user)"><i
+                class="fas fa-trash"></i></a>
+            </div>
+        </div>
+        <!--AQUI SE VISUALIZA LA IMAGEN O VIDEO-->
+        <div class="row " id="imagen_historia">
+            <ngb-carousel *ngIf="this.lista" id="carousel" style="width: 100%;height: 100%; ">
+                <ng-template *ngFor="let historia of this.lista" ngbSlide [id]="historia.id_historia" style="width: 100%;height: 100%;">
+                    <div class="carousel-item active" style="width: 100%;height: 100% !important;">
+                        <div class="row">
+                            <div class="col" id="publicada">
+                                <small class="form-text ml-1">{{minutos_publicacion(historia.minutos)}}</small>
+                            </div>
+                            <div class="col-4" id="boton" *ngIf="miHistoria(historia)">
+                                <button class="btn" id="vistos"><i class="fas fa-eye"></i><strong> {{historia.cantvistas}} vistas</strong></button>
+                            </div>
+                        </div>
+                        <div class="carousel-indicators"></div>
+                        <div class="wrapper" style="width: 100%;height: 100%;">
+                            <div *ngIf="IdentificarExtension(historia.url_historia)=='IMAGEN'" class="col-md-12 mx-auto" style="padding-top: auto; padding-bottom: auto; width: 100%;height: 100%;">
+                                <img class="" width="100%" src={{historia.url_historia}} alt="publicacion" />
+                            </div>
+
+                            <div *ngIf="IdentificarExtension(historia.url_historia)=='VIDEO'" class="col-md-12 mx-auto" style="margin-top: auto; margin-bottom: auto; width: 100%;height: 100%;">
+                                <video class="" width="100%" src={{historia.url_historia}} alt="publicacion" controls></video>
+                            </div>
+                        </div>
+                        <div class="row footer justify-content-center">
+                            <div class="final">
+                                <p>{{historia.descripcion}}</p>
+                            </div>
+                        </div>
+                    </div>
+                </ng-template>
+            </ngb-carousel>
+        </div>
+    </div>
+</div>

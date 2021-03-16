@@ -1,0 +1,546 @@
+<!-- aqui inicia la parte que salen los post de los amigos -->
+
+<div class="text-center">
+    <div id={{id_publicacion}} class="card">
+
+        <!--Cabezera de la Publicacion-->
+        <div class="row mt-2 mb-2">
+            <div class="col-2 col-sm-1 col-md-1 col-lg-1 col-xl-1 align-self-center">
+                <img class="ml-2 img-profile rounded-circle" width="35px" height="35px" src={{img_perfil}}
+                    fallback="https://unsplash.com/photos/rDEOVtE7vOs">
+            </div>
+            <div class="col-8 col-sm-9 col-md-9 col-lg-9 col-xl-9 text-left align-self-center ">
+                <p class="p_user_name font-weight-bold">{{usuario}}</p>
+            </div>
+            <div class="col-1 col-sm-2 col-md-2 col-lg-2 col-xl-2 align-self-center text-right">
+                <a *ngIf="id_user == id_usuario_actual" role="button" class="nav-item text-right  mr-3"
+                    style="color: black;" (click)="EliminarPublicacion(id_publicacion)"><i class="fas fa-trash"></i></a>
+            </div>
+        </div>
+
+        <!--AQUI SE VISUALIZA LA IMAGEN O VIDEO-->
+        <div class="row ">
+            <div *ngIf="IdentificarExtension(imagen)=='IMAGEN'" class="col-md-12 mx-auto ">
+                <img class="size-publicacion" width="100%" src={{imagen}} alt="publicacion" />
+            </div>
+
+            <div *ngIf="IdentificarExtension(imagen)=='VIDEO'" class="col-md-12 mx-auto">
+                <video class="size-publicacion" width="100%" src={{imagen}} alt="publicacion" controls></video>
+            </div>
+        </div>
+
+        <!--SECCION DE BOTONES REACCIONAR, COMENTAR, COMPARTIR, GUARDAR, ENVIAR X DM-->
+        <div class="row container" id='container_publicacion'>
+            <div class="text-left container_publicacion">
+                <div class="col-md-12">
+                    <!-- tipos de reacciones -->
+                    <a id='btn_reacciones' role="button" (click)="showHide(id_publicacion)" class="navbar-brand"
+                        style="color: black; cursor: pointer;">
+
+                        <img *ngIf="reaccion_usada == 'ME_GUSTA'" src="../../assets/like.ico" width="23px" height="23px"
+                            alt="">
+
+                        <img *ngIf="reaccion_usada == 'ME_ENCANTA'" src="../../assets/love.ico" width="23px"
+                            height="23px" alt="">
+
+                        <img *ngIf="reaccion_usada == 'ME_ENTRISTECE'" src="../../assets/sad.ico" width="23px"
+                            height="23px" alt="">
+
+                        <img *ngIf="reaccion_usada == 'ME_ENFADA'" src="../../assets/angry.ico" width="23px"
+                            height="23px" alt="">
+
+                        <img *ngIf="reaccion_usada == 'ME_DIVIERTE'" src="../../assets/haha.ico" width="23px"
+                            height="23px" alt="">
+
+                        <img *ngIf="reaccion_usada == 'ME_SORPRENDE'" src="../../assets/wow.ico" width="23px"
+                            height="23px" alt="">
+
+                        <i *ngIf="reaccion_usada == null" class="far fa-heart"></i>
+                    </a>
+
+                    <!-- ubicacion -->
+                    <a class="navbar-brand" style="color: black; cursor: pointer;"><i class="far fa-comment"></i></a>
+                    <!-- Compartir data-toggle="modal"
+                        data-target="#modal_compartir"-->
+                    <a id="btn_compartir" class="navbar-brand" style="color: black; cursor: pointer;"
+                        (click)="PasarID(id_publicacion)" data-toggle="modal" data-target="#modal_compartir"><i
+                            class="far fa-paper-plane"></i></a>
+                    <!-- Guardar -->
+
+                    <a *ngIf="guardada === '0'" id="guardar{{id_publicacion}}" class="navbar-brand"
+                        style="color: black; cursor: pointer;" (click)="GuardarPublicacion(id_publicacion)"><i
+                            class="far fa-bookmark"></i></a>
+
+                    <a *ngIf="guardada === '1'" id="guardar{{id_publicacion}}" class="navbar-brand"
+                        style="color: black; cursor: pointer;" (click)="GuardarPublicacion(id_publicacion)"><i
+                            class="fas fa-bookmark"></i></a>
+
+
+
+                </div>
+
+                <!--
+                <div class="col-md-12" style="display:none;" id="reacciones_cont{{id_publicacion}}">
+                    <p>Ver reacciones</p>
+                </div>-->
+
+
+                <!--CONTAINER DE REACCIONES-->
+                <div class="card container_reacciones" id="reacciones_cont{{id_publicacion}}" style="display:none;">
+                    <div class="col-md-12">
+                        <div class="row ml-1  text-center">
+
+                            <a id='btn_megusta' (click)="reaccionar(id_publicacion, 'ME_GUSTA')" role="button"
+                                class="navbar-brand">
+                                <img class="icono_reaccion" src="../../assets/like.ico" width="25px" height="25px"
+                                    alt="">
+                            </a>
+
+                            <a id='btn_meencanta' (click)="reaccionar(id_publicacion,'ME_ENCANTA')" role="button"
+                                class="navbar-brand">
+                                <img class="icono_reaccion" src="../../assets/love.ico" width="25px" height="25px"
+                                    alt="">
+                            </a>
+
+                            <a id='btn_meentristece' (click)="reaccionar(id_publicacion, 'ME_ENTRISTECE')" role="button"
+                                class="navbar-brand">
+                                <img class="icono_reaccion" src="../../assets/sad.ico" width="25px" height="25px"
+                                    alt="">
+                            </a>
+
+                            <a id='btn_meenfada' (click)="reaccionar(id_publicacion,'ME_ENFADA')" role="button"
+                                class="navbar-brand">
+                                <img class="icono_reaccion" src="../../assets/angry.ico" width="25px" height="25px"
+                                    alt="">
+                            </a>
+
+                            <a id='btn_medivierte' (click)="reaccionar(id_publicacion, 'ME_DIVIERTE')" role="button"
+                                class="navbar-brand">
+                                <img class="icono_reaccion" src="../../assets/haha.ico" width="25px" height="25px"
+                                    alt="">
+                            </a>
+
+                            <a id='btn_mesorprende' (click)="reaccionar(id_publicacion, 'ME_SORPRENDE')" role="button"
+                                class="navbar-brand">
+                                <img class="icono_reaccion" src="../../assets/wow.ico" width="25px" height="25px"
+                                    alt="">
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="col-md-12 text-left">
+                <div class="row">
+                    <div class="col-6 col-sm-6 col-md-6 col-lg-6 col-xl-6" style="cursor: pointer;" data-toggle="modal"
+                        data-target="#modal_reacciones">
+                        <p class="h6">{{SumarReacciones()}} Reacciones</p>
+                    </div>
+                    <div class="col-6 col-sm-6 col-md-6 col-lg-6 col-xl-6 text-right" style="cursor: pointer;"
+                        data-toggle="modal" data-target="#modal_publicacion">
+                        <p class="h6">{{cant_comentarios}} Comentarios</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-12 mt-2 text-left">
+                <p><em>{{descripcion}}</em></p>
+            </div>
+
+            <div class="col-sm-12 col-md-12 col-lg-12 mt-2 text-left">
+
+                <div *ngFor="let comentario of comentarios">
+                    <div class="row container_comentarios">
+
+                        <div class="col-8 col-sm-10 col-md-10 col-lg-10 col-xl-10">
+                            <p id={{comentario.id_comentario}}><strong>{{comentario.usuario}}
+                                </strong>{{comentario.texto_comentario}}</p>
+                        </div>
+
+                        <div class="col-4 col-sm-2 col-md-2 col-lg-2 col-xl-2 text-right">
+                            <a id='btn_reacciones_comentarios' (click)="showHideReaComent(comentario.id_comentario)"
+                                role="button" class="navbar-brand" style="color: black; cursor: pointer;">
+
+                                <img *ngIf="comentario.reaccion_usada == 'ME_GUSTA'" src="../../assets/like.ico"
+                                    width="23px" height="23px" alt="">
+
+                                <img *ngIf="comentario.reaccion_usada == 'ME_ENCANTA'" src="../../assets/love.ico"
+                                    width="23px" height="23px" alt="">
+
+                                <img *ngIf="comentario.reaccion_usada == 'ME_ENTRISTECE'" src="../../assets/sad.ico"
+                                    width="23px" height="23px" alt="">
+
+                                <img *ngIf="comentario.reaccion_usada == 'ME_ENFADA'" src="../../assets/angry.ico"
+                                    width="23px" height="23px" alt="">
+
+                                <img *ngIf="comentario.reaccion_usada == 'ME_DIVIERTE'" src="../../assets/haha.ico"
+                                    width="23px" height="23px" alt="">
+
+                                <img *ngIf="comentario.reaccion_usada == 'ME_SORPRENDE'" src="../../assets/wow.ico"
+                                    width="23px" height="23px" alt="">
+
+                                <i *ngIf="comentario.reaccion_usada == null" class="far fa-heart"></i>
+
+                            </a>
+
+                            <a *ngIf="comentario.id_user == id_usuario_actual" class="navbar-brand "
+                                style="color: black;" id="userDropdown" role="button" data-toggle="dropdown"
+                                aria-haspopup="true" aria-expanded="false">
+                                <span class="d-none d-lg-inline text-gray-600 small"></span>
+                                <i class="fas fa-ellipsis-v"></i>
+                            </a>
+
+                            <!-- Dropdown - User Information -->
+                            <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in container"
+                                aria-labelledby="userDropdown">
+                                <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                                    <a style="cursor: pointer;"
+                                        (click)="AuxEditarComentario(id_publicacion, comentario.id_comentario, comentario.texto_comentario)"><i
+                                            class="fas fa-pen"></i> Editar</a>
+                                </div>
+                                <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 mt-2">
+                                    <a style="cursor: pointer;"
+                                        (click)="EliminarComentario(comentario.id_comentario, id_publicacion)"><i
+                                            class="fas fa-trash"></i> Eliminar</a>
+                                </div>
+
+                            </div>
+
+
+
+                        </div>
+
+
+                    </div>
+
+                    <!--CONTAINER DE REACCIONES DE COMENTARIOS-->
+                    <div class="card container_reacciones_comentarios"
+                        id="reacciones_cont_comentarios{{comentario.id_comentario}}" style="display:none;">
+                        <div class="col-md-12">
+                            <div class="row ml-1 text-center">
+
+                                <a id='btn_megusta' (click)="ReaccionarComentario('ME_GUSTA')" role="button"
+                                    class="navbar-brand">
+                                    <img class="icono_reaccion" src="../../assets/like.ico" width="25px" height="25px"
+                                        alt="">
+                                </a>
+
+                                <a id='btn_meencanta' (click)="ReaccionarComentario('ME_ENCANTA')" role="button"
+                                    class="navbar-brand">
+                                    <img class="icono_reaccion" src="../../assets/love.ico" width="25px" height="25px"
+                                        alt="">
+                                </a>
+
+                                <a id='btn_meentristece' (click)="ReaccionarComentario('ME_ENTRISTECE')" role="button"
+                                    class="navbar-brand">
+                                    <img class="icono_reaccion" src="../../assets/sad.ico" width="25px" height="25px"
+                                        alt="">
+                                </a>
+
+                                <a id='btn_meenfada' (click)="ReaccionarComentario('ME_ENFADA')" role="button"
+                                    class="navbar-brand">
+                                    <img class="icono_reaccion" src="../../assets/angry.ico" width="25px" height="25px"
+                                        alt="">
+                                </a>
+
+                                <a id='btn_medivierte' (click)="ReaccionarComentario('ME_DIVIERTE')" role="button"
+                                    class="navbar-brand">
+                                    <img class="icono_reaccion" src="../../assets/haha.ico" width="25px" height="25px"
+                                        alt="">
+                                </a>
+
+                                <a id='btn_mesorprende' (click)="ReaccionarComentario('ME_SORPRENDE')" role="button"
+                                    class="navbar-brand">
+                                    <img class="icono_reaccion" src="../../assets/wow.ico" width="25px" height="25px"
+                                        alt="">
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+
+                <hr />
+            </div>
+
+            <div class="input-group col-md-12 mb-3">
+                <input id="txt_comentario{{id_publicacion}}" [(ngModel)]='texto_comentario' type="text"
+                    class="form-control-plaintext" placeholder="Agregar un comentario" aria-label="Recipient's username"
+                    aria-describedby="button-addon2">
+                <div class="input-group-append">
+                    <button class="btn" type="button" (click)="Comentar(id_publicacion)"
+                        id="btn_publicar">Publicar</button>
+                    <button class="btn" style="display:none;" type="button" (click)="EditarComentario()"
+                        id="btn_actualizar">Actualizar</button>
+                    <button class="btn" style="display:none;" type="button" (click)="CancelarEdicion(id_publicacion)"
+                        id="btn_cancelar">Cancelar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!--MODAL COMENTARIOS-->
+    <div class="modal fade" id="modal_publicacion" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-scrollable">
+            <div class="modal-content" style="height: 400px;">
+                <div class="row">
+                    <div class="col-md-6 mx-auto">
+                        <img class="" height="300px" src={{imagen}} alt="publicacion">
+                    </div>
+                    <div class="col-md-16 text-left">
+                        <div class="mb-3">
+                            <h5>Comentarios</h5>
+                        </div>
+                        <div *ngFor="let comentario of comentarios">
+                            <div class="row container_comentarios">
+
+                                <div class="col-10 col-sm-10 col-md-11 col-lg-11 col-xl-11">
+                                    <p id={{comentario.id_comentario}}><strong>{{comentario.usuario}}
+                                        </strong>{{comentario.texto_comentario}}</p>
+                                </div>
+
+                                <div class="col-2 col-sm-2 col-md-1 col-lg-1 col-xl-1">
+                                    <a id='btn_reacciones_comentarios'
+                                        (click)="showHideReaComent(comentario.id_comentario)" role="button"
+                                        class="navbar-brand" style="color: black; cursor: pointer;">
+
+                                        <img *ngIf="comentario.reaccion_usada == 'ME_GUSTA'" src="../../assets/like.ico"
+                                            width="23px" height="23px" alt="">
+
+                                        <img *ngIf="comentario.reaccion_usada == 'ME_ENCANTA'"
+                                            src="../../assets/love.ico" width="23px" height="23px" alt="">
+
+                                        <img *ngIf="comentario.reaccion_usada == 'ME_ENTRISTECE'"
+                                            src="../../assets/sad.ico" width="23px" height="23px" alt="">
+
+                                        <img *ngIf="comentario.reaccion_usada == 'ME_ENFADA'"
+                                            src="../../assets/angry.ico" width="23px" height="23px" alt="">
+
+                                        <img *ngIf="comentario.reaccion_usada == 'ME_DIVIERTE'"
+                                            src="../../assets/haha.ico" width="23px" height="23px" alt="">
+
+                                        <img *ngIf="comentario.reaccion_usada == 'ME_SORPRENDE'"
+                                            src="../../assets/wow.ico" width="23px" height="23px" alt="">
+
+                                        <i *ngIf="comentario.reaccion_usada == null" class="far fa-heart"></i>
+
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--MODAL CANTIDAD DE REACCIONES-->
+    <div class="modal fade" id="modal_reacciones" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content" style="width: 600px;">
+                <div class="bg_reacciones col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                    <div class="row">
+                        <div class="col-md-11">
+                            <h5 class="mt-1 ">Reacciones</h5>
+                        </div>
+                        <div class="col-md-1">
+                            <button type="button" class="close bg_reacciones" data-dismiss="modal" aria-label="Close"
+                                style="color: white;">x</button>
+                        </div>
+                    </div>
+                </div>
+                <ul class="nav nav-pills mb-3 mt-2 justify-content-center" style="font-size: 25px;" id="pills-tab"
+                    role="tablist">
+                    <li class="nav-item mr-1" role="presentation">
+                        <a class="nav-link active" id="pills-megusta-tab" data-toggle="pill" href="#pills-me-gusta"
+                            role="tab" aria-controls="pills-home" aria-selected="true">
+                            <img src="../../assets/like.ico" width="25px" height="25px" alt="">
+                            {{cant_megusta}}</a>
+                    </li>
+                    <li class="nav-item mr-1" role="presentation">
+                        <a class="nav-link" id="pills-meencanta-tab" data-toggle="pill" href="#pills-me-encanta"
+                            role="tab" aria-controls="pills-profile" aria-selected="false">
+                            <img src="../../assets/love.ico" width="25px" height="25px" alt="">
+                            {{cant_meencanta}}</a>
+                    </li>
+                    <li class="nav-item mr-1" role="presentation">
+                        <a class="nav-link" id="pills-meentristece-tab" data-toggle="pill" href="#pills-me-entristece"
+                            role="tab" aria-controls="pills-contact" aria-selected="false">
+                            <img src="../../assets/sad.ico" width="25px" height="25px" alt="">
+                            {{cant_meentristece}}</a>
+                    </li>
+
+                    <li class="nav-item mr-1" role="presentation">
+                        <a class="nav-link" id="pills-meenfada-tab" data-toggle="pill" href="#pills-me-enfada"
+                            role="tab" aria-controls="pills-contact" aria-selected="false">
+                            <img src="../../assets/angry.ico" width="25px" height="25px" alt="">
+                            {{cant_meenfada}}</a>
+                    </li>
+
+                    <li class="nav-item mr-1" role="presentation">
+                        <a class="nav-link" id="pills-medivierte-tab" data-toggle="pill" href="#pills-me-divierte"
+                            role="tab" aria-controls="pills-contact" aria-selected="false">
+                            <img src="../../assets/haha.ico" width="25px" height="25px" alt="">
+                            {{cant_medivierte}}</a>
+                    </li>
+
+                    <li class="nav-item mr-1" role="presentation">
+                        <a class="nav-link" id="pills-sorprende-tab" data-toggle="pill" href="#pills-me-sorprende"
+                            role="tab" aria-controls="pills-contact" aria-selected="false">
+                            <img src="../../assets/wow.ico" width="25px" height="25px" alt="">
+                            {{cant_mesorprende}}</a>
+                    </li>
+
+
+                </ul>
+                <div class="tab-content" id="pills-tabContent">
+                    <div class="tab-pane fade show active" id="pills-me-gusta" role="tabpanel"
+                        aria-labelledby="pills-megusta-tab">
+                        <p>Lista Me Gusta</p>
+                    </div>
+                    <div class="tab-pane fade show" id="pills-me-encanta" role="tabpanel"
+                        aria-labelledby="pills-meencanta-tab">
+                        <p>Lista Me Encanta</p>
+                    </div>
+                    <div class="tab-pane fade show" id="pills-me-entristece" role="tabpanel"
+                        aria-labelledby="pills-meentristece-tab">
+                        <p>Lista Me Entristece</p>
+                    </div>
+                    <div class="tab-pane fade show" id="pills-me-enfada" role="tabpanel"
+                        aria-labelledby="pills-meenfada-tab">
+                        <p>Lista Me Enfada</p>
+                    </div>
+                    <div class="tab-pane fade show" id="pills-me-divierte" role="tabpanel"
+                        aria-labelledby="pills-medivierte-tab">
+                        <p>Lista Me Divierte</p>
+                    </div>
+                    <div class="tab-pane fade show" id="pills-me-sorprende" role="tabpanel"
+                        aria-labelledby="pills-sorprende-tab">
+                        <p>Lista Me Sorprende</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--MODAL COMPARTIR PUBLICACIONES-->
+    <div class="modal fade" id="modal_compartir" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="container">
+                    <div class="col-md-12 text-left">
+                        <div class="modal-header">
+                            <h2>Compartir en...</h2>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+
+                        <div class="ml-3 mt-3">
+                            <h4 class="mb-3" style="cursor: pointer;" (click)="CompartirPublicacion('btn-dm')"><i
+                                    class="fas fa-paper-plane mr-2" style="font-size: 25px;"></i> Direct
+                                Messenger</h4>
+                            <h4 class="mb-3" style="cursor: pointer;" (click)="CompartirPublicacion('btn-fb')"><i
+                                    class="fab fa-facebook mr-2" style="font-size: 25px;"></i>
+                                Facebook</h4>
+                            <h4 class="mb-3" style="cursor: pointer;" (click)="CompartirPublicacion('btn-ms')"><i
+                                    class="fab fa-facebook-messenger mr-2" style="font-size: 25px;"></i>
+                                Messenger</h4>
+                            <h4 class="mb-3" style="cursor: pointer;" (click)="CompartirPublicacion('btn-tw')"><i
+                                    class="fab fa-twitter mr-2" style="font-size: 25px;"></i> Twitter
+                            </h4>
+                            <h4 class="mb-3" style="cursor: pointer;" (click)="CompartirPublicacion('btn-ws')"><i
+                                    class="fab fa-whatsapp-square mr-2" style="font-size: 25px;"></i>
+                                Whatsapp
+                            </h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <!--MODAL OPCIONES DE LAS PUBLICACIONES-->
+    <div class="modal fade" id="modal_opciones_publicacion" tabindex="-1" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="container">
+                    <div class="col-md-12 text-left">
+                        <div class="modal-header">
+                            <h4>¿Seguro deseas eliminar esta publicación?</h4>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+
+                        <div class="row mt-4 mb-4 text-center">
+                            <div class="col-6 col-sm-6 col-md-6 col-lg-6 col-xl-6"
+                                (click)="EliminarPublicacion(id_publicacion)" data-dismiss="modal" aria-label="Close">
+                                <button class="btn btn-info btn-lg btn-block">Si</button>
+                            </div>
+                            <div class="col-6 col-sm-6 col-md-6 col-lg-6 col-xl-6" data-dismiss="modal"
+                                aria-label="Close">
+                                <button class="btn btn-danger btn-lg btn-block">No</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- eso es el modal que sale cuando se clickea en la opcion de publicacion que sale en la seccion de noticias -->
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-body">
+                        <a role="button">
+                            <p class="text-danger" align="center"><strong>Reportar</strong></p>
+                        </a>
+                        <hr class="sidebar-divider">
+                        <a role="button">
+                            <p class="text-danger" align="center"><strong>Dejar de seguir</strong></p>
+                        </a>
+                        <hr class="sidebar-divider">
+                        <a role="button">
+                            <p class="text-dark" align="center">Ir a la publicación</p>
+                        </a>
+                        <hr class="sidebar-divider">
+                        <a role="button">
+                            <p class="text-dark" align="center">Ir a la publicación</p>
+                        </a>
+                        <hr class="sidebar-divider">
+                        <a role="button">
+                            <p class="text-dark" align="center">Compartir en...</p>
+                        </a>
+                        <hr class="sidebar-divider">
+                        <a role="button">
+                            <p class="text-dark" align="center">Copiar enlace</p>
+                        </a>
+                        <hr class="sidebar-divider">
+                        <a role="button">
+                            <p class="text-dark" align="center">Insertar</p>
+                        </a>
+                        <hr class="sidebar-divider">
+                        <a role="button">
+                            <p class="text-dark" align="center">Salir</p>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+</div>
+
+
+<!-- aqui termina el modal -->

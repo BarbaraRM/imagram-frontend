@@ -1,0 +1,137 @@
+.p_user_name {
+    font-size: 12px;
+}
+
+.size-publicacion {
+    height: 600px;
+}
+
+.modal {
+    background-color: rgba(0, 0, 0, 0.3);
+}
+
+.bg_reacciones {
+    background-color: black;
+    color: white;
+    margin-right: -2px !important;
+}
+
+.nav-pills .nav-link.active, .nav-pills .show>.nav-link {
+    color: #fff;
+    background-color: #c9c7c7;
+}
+
+.container_publicacion {
+    position: relative;
+}
+
+.container_comentarios {
+    position: relative;
+    margin-right: -60px;
+}
+
+.container_reacciones {
+    position: absolute;
+    border-radius: 25px;
+    opacity: 1;
+    background-color: black;
+    border-color: rgb(0, 0, 0);
+    border-width: 2px;
+    width: 280px;
+    height: 50px;
+    top: -70px;
+    right: 20;
+}
+
+.container_reacciones_comentarios {
+    position: absolute;
+    border-radius: 25px;
+    opacity: 1;
+    background-color: rgb(0, 0, 0);
+    border-color: rgb(0, 0, 0);
+    border-width: 2px;
+    width: 280px;
+    height: 50px;
+    top: -50px;
+    left: 20px;
+}
+
+.icono_reaccion {
+    cursor: pointer;
+}
+
+.icono_reaccion:hover {
+    width: 30px;
+    height: 30px;
+}
+
+.item_share:hover {
+    background-color: #e7e1e1;
+    cursor: pointer;
+    height: 35px;
+    top: 5px;
+    border-radius: 15px;
+}
+
+@media (min-width: 300px) {
+    .publicacion {
+        margin-left: -20px;
+        margin-right: -20px;
+    }
+    .size-publicacion {
+        height: 200px;
+    }
+}
+
+/*Small devices (landscape phones, 576px and up)*/
+
+@media (min-width: 576px) {
+    .publicacion {
+        margin-left: -20px;
+        margin-right: -20px;
+    }
+    .container_reacciones_comentarios {
+        position: absolute;
+        top: -50px;
+        left: 250px;
+    }
+    .size-publicacion {
+        height: 350px;
+    }
+}
+
+/*Medium devices (tablets, 768px and up)*/
+
+@media (min-width: 768px) {
+    .container_reacciones_comentarios {
+        position: absolute;
+        top: -50px;
+        left: 400px;
+    }
+    .size-publicacion {
+        height: 450px;
+    }
+}
+
+/*Large devices (desktops, 992px and up)*/
+
+@media (min-width: 992px) {
+    .container_reacciones_comentarios {
+        position: absolute;
+        top: -50px;
+        left: 250px;
+    }
+    .size-publicacion {
+        height: 550px;
+    }
+}
+
+/*Extra large devices (large desktops, 1200px and up)*/
+
+@media (min-width: 1200px) {
+    .container_reacciones_comentarios {
+        position: absolute;
+        top: -50px;
+        left: 500px;
+    }
+}

@@ -1,0 +1,49 @@
+<div class="container-fluid fondo align-self-center">
+
+    <div class="row justify-content-center">
+        <h2 class="mt-5 mb-5 imagran-nombre"><i class="far fa-image"></i> Imagram </h2>
+    </div>
+
+    <div class="row justify-content-center">
+
+        <div class="col-10 col-sm-10 col-md-8 col-lg-4 col-xl-4 card mt-5 card-body">
+            <div id="marcos">
+                <div class="text-center">
+                    <h2 class="mt-2 mb-3"><strong>Iniciar Sesión</strong></h2><br>
+                </div>
+                <div class="container">
+
+                    <form (submit)="LoguearUsuario()" id="centrado">
+                        <div class="input-group">
+                            <input type="text" class="form-control" placeholder="Usuario" name="usuario"
+                                required="required" [(ngModel)]="usuario">
+                        </div><br>
+                        <div class="input-group">
+                            <input type="password" class="form-control" placeholder="Contraseña" name="password"
+                                required="required" [(ngModel)]="password">
+                        </div><br>
+                        <div class="text-center mt-2 mb-3">
+                            <a id="referencia" [routerLink]="['/recuperar']" data-toggle="tooltip"
+                                title="Reset password" href="">¿Olvidaste tu
+                                contraseña?</a>
+                        </div>
+
+                        <div class="text-center mt-2 mb-3">
+                            <a id="referencia" [routerLink]="['/registrar']" data-toggle="tooltip"
+                                title="Reset password" href="">Registrate</a>
+                        </div>
+
+                        <div class="text-center mt-2 " id="centrado">
+                            <button id="signup" class="btn btn-outline-dark">Iniciar sesión</button><br>
+                        </div>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+
+
+</div>
